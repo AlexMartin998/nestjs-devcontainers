@@ -5,3 +5,7 @@ docker-compose.yml
 node_modules/
 docker-compose.prod.yml
 dist
+Dockerfile.devcontainers
+docker-compose-devcontainers.yml
+docker-compose.yml
+

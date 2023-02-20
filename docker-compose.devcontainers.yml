@@ -4,9 +4,10 @@ services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.devcontainers
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
       - ${PORT}:${PORT}
     container_name: api_nest
@@ -15,6 +16,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+
 
   postgres:
     image: postgres:14.6
@@ -27,6 +29,13 @@ services:
     container_name: inventory_db
     volumes:
       - postgres_db:/var/lib/postgresql/data
+
+    user: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
 
 
 
