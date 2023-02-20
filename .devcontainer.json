@@ -1,0 +1,8 @@
+{
+  "name": "Nest Dev",
+  "dockerComposeFile": ["docker-compose-dev.yml"],
+  "service": "api",
+  "shutdownAction": "none",
+  "workspaceFolder": "/app",
+  "extensions": ["esbenp.prettier-vscode", "dsznajder.es7-react-js-snippets"]
+}

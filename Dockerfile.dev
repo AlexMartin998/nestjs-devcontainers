@@ -1,0 +1,21 @@
+FROM node:18-alpine as deps
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN npm i -g pnpm
+RUN pnpm install
+
+
+
+FROM node:18-alpine as builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN yarn build
+
+
+
+FROM node:18-alpine as runner
+WORKDIR /app
+COPY --from=builder /app/dist ./dist
+COPY --from=deps /app/node_modules ./node_modules
+CMD ["npm", "run", "start:dev"]
