@@ -26,7 +26,37 @@ docker compose -f docker-compose.devcontainers.yml up
    6. Stop and remove containers, networks
 
 ```bash
-docker compose -f docker-compose.devcontainers.yml down -v
+docker compose -f docker-compose.devcontainers.yml down
 ```
    
 
+
+#### Dev mode
+Make sure that you have Node.js installes in your divece.
+
+- Install al dependencies
+
+```bash
+# pnpm
+npm i -g pnpm
+
+# nest
+npm i -g @nestjs/cli
+
+# app deps
+pnpm install
+```
+
+- Run the app in dev mode
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+- Stop and remove containers, networks
+
+```bash
+docker compose -f docker-compose.dev.yml down
+```
+
+### Prod Env
