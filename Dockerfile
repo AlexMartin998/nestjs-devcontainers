@@ -1,13 +1,29 @@
-FROM node:18-alpine
-
+FROM node:18-alpine as dev-deps
 WORKDIR /app
+COPY package.json package.json
+RUN yarn install --frozen-lockfile
 
-COPY package.json pnpm-lock.yaml tsconfig* ./
 
-RUN npm i -g pnpm @nestjs/cli
-RUN pnpm install
-RUN pnpm run build
-
+FROM node:18-alpine as builder
+WORKDIR /app
+COPY --from=dev-deps /app/node_modules ./node_modules
 COPY . .
+# RUN yarn test
+RUN yarn build
 
-CMD ["npm", "run", "start:prod"]
+FROM node:18-alpine as prod-deps
+WORKDIR /app
+COPY package.json package.json
+RUN yarn install --prod --frozen-lockfile
+
+
+FROM node:18-alpine as prod
+EXPOSE 3000
+WORKDIR /app
+ENV APP_VERSION=${APP_VERSION}
+COPY --from=prod-deps /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+
+CMD [ "node","dist/main.js"]
+
+
