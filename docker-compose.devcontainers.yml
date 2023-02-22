@@ -1,7 +1,6 @@
 version: '3.9'
 
 services:
-
   npm:
     image: node:18-alpine
     user: ${DOCKER_USER}
@@ -14,7 +13,6 @@ services:
       - .:/code
     # command: npm install
 
-  
   nest:
     build:
       context: .
@@ -34,7 +32,6 @@ services:
       npm:
         condition: service_completed_successfully
 
-
   postgres:
     image: postgres:14.6
     restart: always
@@ -48,15 +45,10 @@ services:
       - postgres_db:/var/lib/postgresql/data
     user: postgres
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: ['CMD-SHELL', 'pg_isready']
       interval: 5s
       timeout: 2s
       retries: 5
 
-
-
 volumes:
   postgres_db:
-
-
-
