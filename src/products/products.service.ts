@@ -98,7 +98,8 @@ export class ProductsService {
     ]);
 
     // console.log('\n\n\nMe llamaron\n\n')
-    return { count, products };
+    // return { count, products };
+    return { count: count + 100, products };
   }
 
   async findOne(term: string, userId: number): Promise<Product> {

@@ -7,31 +7,39 @@
 ## Installation
 
 ## Running the app
+
 ### Dev Env
 
 #### Dev containers - VS Code
+
 1. Install [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension in VS Code
-2. Run ```docker-compose.devcontainers.yml```
+
+2. Add your host user
 
 ```bash
-docker compose -f docker-compose.devcontainers.yml up
+export DOCKER_USER="$(id -u):$(id -g)"
 ```
 
-3. Attach to Running Container
-   1. Press down: ```Ctrl + Shift + P```
+3. Run `docker-compose.devcontainers.yml`
+
+```bash
+docker compose -f docker-compose.devcontainers.yml up --build
+```
+
+4. Attach to Running Container
+   1. Press down: `Ctrl + Shift + P`
    2. Search: `Dev Containers: Attach to Running Container`
    3. Select `/api_nest` container
-   4. New VS Code window will open, so open the folder project:  `/app/`
+   4. New VS Code window will open, so open the folder project: `/code/`
    5. Close the remote connections in VS Code
    6. Stop and remove containers, networks
 
 ```bash
 docker compose -f docker-compose.devcontainers.yml down
 ```
-   
-
 
 #### Dev mode
+
 Make sure that you have Node.js installes in your divece.
 
 - Install al dependencies
@@ -60,3 +68,11 @@ docker compose -f docker-compose.dev.yml down
 ```
 
 ### Prod Env
+
+- Configure the app to run in prod
+
+- Running the app
+
+```
+docker compose up --build
+```
