@@ -44,7 +44,7 @@ docker compose -f docker-compose.devcontainers.yml down
 
 Make sure that you have Node.js installed in your divece.
 
-- Install al dependencies
+- Install all dependencies
 
 ```bash
 # pnpm
