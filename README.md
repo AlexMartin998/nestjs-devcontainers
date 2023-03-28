@@ -42,7 +42,7 @@ docker compose -f docker-compose.devcontainers.yml down
 
 #### Dev mode
 
-Make sure that you have Node.js installes in your divece.
+Make sure that you have Node.js installed in your divece.
 
 - Install al dependencies
 
